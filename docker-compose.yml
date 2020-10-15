@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+
+  nginx:
+    image: nginx
+    restart: always
+    volumes:
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+     - "8080:8080"
+
+  server:
+    build: ./server/
+    restart: always
